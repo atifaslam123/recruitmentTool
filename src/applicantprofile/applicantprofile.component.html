@@ -1,0 +1,126 @@
+<div class="row">
+  <div class="col-md-12">
+    <sd-card class="sdCard">
+      <sd-card-header class="p" title="APPLICANT'S PROFILE"></sd-card-header>
+      <sd-card-body>
+
+        <div *ngFor="let applicant of applicant.applicantProfile">
+          <span class="_600 text-primary">{{ applicant.ID + ". " + applicant.first_name + " " + applicant.last_name }}
+            <div class="row" style="float: right">
+              <div>
+                <button *ngIf="authUser.isAdmin || authUser.isSuperAdmin" type="button" (click) = "editApplicants()"
+                  class="btn btn-raised btn-with-icon btn-outline accent">
+                  <i class="icons8-edit"></i>
+                  <span>Edit Applicant Details</span>
+                </button>
+              </div>
+              <div class="divider"></div>
+              <div>
+                <button *ngIf="authUser.isAdmin || authUser.isSuperAdmin" type="button" (click)="open()" class="btn btn-raised btn-with-icon btn-outline accent">
+                  <i class="icons8-test-passed"></i>
+                  <span>Plan Test</span>
+                </button>
+              </div>
+            </div>
+          </span>
+          <small class="block text-muted" ><i>{{ applicant.position }}</i></small>
+
+          <hr>
+
+          <span class="text-color">Gender: </span>
+          
+            <span *ngIf="applicant.gender == 'M'" class="text-muted"><i>Male</i></span>
+            <span *ngIf="applicant.gender == 'F'" class="text-muted"><i>Female</i></span>
+            <span *ngIf="applicant.gender == 'O'" class="text-muted"><i>Other</i></span>
+            <br>
+
+          <span class="text-color">Status in recruitment: </span>
+          <span class="text-muted"><i>
+              {{ applicant.statusRecruitment }}</i></span>
+              <br>
+          <span class="text-color">Department: </span>
+          <span class="text-muted"><i>
+              {{ applicant.department}}</i></span>
+              <br>
+          <span class="text-color">Notes: </span>
+          <span class="text-muted">{{ applicant.notes}}</span><br>
+
+        </div>
+
+        <br>
+        
+        <div *ngFor="let test of applicant.tests">
+          <ul class="card-body list-group-item">
+            <a class=" d-flex" (click)="question(test.ID); applicantAnswer(test.ID)">
+              <div class="">
+                <span class="btn circle btn-outline text-primary">
+                  <i *ngIf="test.dateTimeTaken; else plannedTest">{{ (test.testResult*100).toFixed(1) }}%</i>
+                  
+                  <ng-template #plannedTest>Scheduled test
+                    <div class="mx-1 mb-1" style="color:white; position: absolute; right: 10px; bottom: 3px">
+                      <a class="grey circle w-35 btn btn-with-icon" data-toggle="tooltip" data-placement="bottom"
+                        title="Delete test" (click)="deleteTest(test.ID)">
+                        <i class="icons8-trash"></i>
+                      </a>
+                    </div>
+                  </ng-template>
+
+                </span>
+              </div>
+              <div class="ml">
+                <small class="text-muted text-ellipsis">{{ test.profile_name }}</small>
+                <small class="text-muted text-ellipsis">{{ test.dateTimeTaken }}</small>
+              </div>
+            </a>
+          
+
+          </ul>
+
+        </div>
+     
+
+        <br>
+
+        <div class="row">
+
+          <div class="col-md-6">
+            <div class="card-body">
+            <div *ngIf="!selectedTest">              
+              <div *ngFor="let question of test.testQuestion">
+                <!-- <div   *ngFor="let applicantAnswer of test.applicantAnswer" > -->
+                <ul class="card-body list-group-item">
+                  <a class="d-flex" (click)="answer(question.ID); testCorrect(question.ID)">
+                    <div class="ml">
+
+                      <!-- <small class="text-muted text-ellipsis">{{ question.question_name }}</small> -->
+                      <small class="text-muted text-ellipsis">{{ question.questionText }}</small>
+
+                    </div>
+                  </a>
+
+                </ul>
+                <!--</div>-->
+              </div>
+            </div>
+
+
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="card-body">
+
+              <app-answerpage></app-answerpage>
+
+            </div>
+          </div>
+        </div>
+      </sd-card-body>
+
+
+      <!-- <sd-card-footer>
+        Footer content, probably not very relevant for the most part
+      </sd-card-footer> -->
+    </sd-card>
+  </div>
+</div>

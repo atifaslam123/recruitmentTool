@@ -1,0 +1,125 @@
+            <div class="" style=" display: block; margin-left: auto; margin-right: auto;">
+
+                <div class="modal-header">
+                  <h4 class="modal-title">CREATING A USER</h4>
+                  <button type="button" class="close" aria-label="Close" (click)="return()" style="float: right;">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body d-flex justify-content-center">
+  
+          <form [formGroup]="addUserForm" #myForm="ngForm">
+              <div class="form-group row">
+                  <label class="col-sm-5 col-form-label">Email</label>
+                  <div class="col-sm-7"><input formControlName="username" class="form-control" type="email" name="email" ngModel email #username required >
+                    <!-- <p *ngIf="!(username.pattern)">The email address must end with @sdworx.com character</p> -->
+                </div>
+              </div>
+                
+              
+                <div class="form-group row">
+                    <label class="col-sm-5 col-form-label">Password</label>
+                    <div class="col-sm-7"><input type="password" [(ngModel)]="textToConvert" [ngModelOptions]="{standalone: true}" class="form-control"  #password required></div>
+                  </div>
+
+                   <div class="form-group row">
+                      <label class="col-sm-5 col-form-label">Confirm Password</label>
+                      <div class="col-sm-7"><input formControlName="conpassword" class="form-control" type="password" #conpassword required></div>
+                    </div>  
+            <div class="form-group row">
+              <label class="col-sm-5 col-form-label">First name</label>
+              <div class="col-sm-7"><input formControlName="firstName" class="form-control" type="text" #firstName required></div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-5 col-form-label">Last name</label>
+              <div class="col-sm-7"><input formControlName="lastName" class="form-control" type="text" #lastName required></div>
+            </div>
+           
+  
+            <!-- <div class="form-group row">   
+              <label class="col-sm-5 col-form-label">Department</label>
+              <div class="col-sm-7">
+                <div class="input-group mb">
+                    <select formControlName="department" class="form-control" #department>
+  
+                    <option selected="selected" hidden="hidden"></option>
+                    <option>IT</option>
+                    <option>HR</option>
+                    <option>Operations</option>
+  
+                  </select>
+                </div>
+              </div>
+            </div> -->
+            <div class="form-group row">  
+            <label class="col-sm-5 col-form-label">Department</label>
+            <div class="col-sm-7 col-form-label">
+                <div class="input-group mb">
+                   <select (change)="teamsService.setDepartment($event.target.value)" formControlName="department" #department>
+                       <option value=0>none</option>
+                           <option [value]="x.department" *ngFor="let x of teamsService.departments;">
+                                  {{x.department}}
+                             </option>
+                     </select>
+           </div>
+          </div>
+        </div>
+
+        <div class="form-group row">  
+            <label class="col-sm-5 col-form-label">Subdepartment </label>
+            <div class="col-sm-7 col-form-label">
+                <div class="input-group mb">
+                <select  (change)="teamsService.setSubdepartment($event.target.value)" formControlName="subdepartment" #subdepartment> 
+                   <option value=0>All</option>
+                     <option [value]="team.subdepartment" *ngFor="let team of teamsService.subdepartments;">
+                            {{team.subdepartment}}
+                      </option>
+            </select>
+          </div>
+        </div>
+        </div>
+
+
+            <div class="form-group row">
+              <label class="col-sm-5 col-form-label">Position</label>
+              <div class="col-sm-7">
+                <div class="input-group mb">
+                    <select class="form-control input-c" formControlName="position" #position>    
+                    <option selected="selected" hidden="hidden"></option>
+                    <option [value]="position.ID" *ngFor="let position of user.positions;">
+                        {{position.position_name}}
+                      </option>    
+                  </select>
+
+                </div>
+              </div>
+            </div>
+           
+            <div class="form-group row">   
+               <label class="col-sm-5 col-form-label">Role</label>
+                <div class="col-sm-7">
+                  <div class="input-group mb">
+                      <select formControlName="role" class="form-control" #role>
+    
+                      <option selected="selected" hidden="hidden"></option>
+                      <option>Super Admin</option>
+                      <option>Admin</option>
+                      <option>Team Leader</option>
+                      <option>Normal User </option>
+                     
+    
+                    </select>
+                  </div>
+                </div>
+              </div>
+            
+            <!-- <div class="form-group row " style="float: right;"> -->
+                <div class="form-group row d-flex justify-content-center">
+              <!-- <button class="btn secondary mx-1" (click)="return()">RETURN</button> -->
+              <button [disabled]="submitted" class="btn primary mx-1"
+                (click)="submitData({username: username.value, password: password.value, conpassword: conpassword.value, firstName: firstName.value, lastName: lastName.value, department: department.value, subdepartment: subdepartment.value, position: position.value, role: role.value, email: username.value})">SUBMIT</button>
+                <button class="btn primary mx-1"
+                (click)="submitDataAnother({username: username.value, password: password.value, conpassword: conpassword.value, firstName: firstName.value, lastName: lastName.value, department: department.value, subdepartment: subdepartment.value, position: position.value, role: role.value, email: username.value}); myForm.reset() ">CREATE ANOTHER</button>
+            </div>
+          </form>
+    </div>

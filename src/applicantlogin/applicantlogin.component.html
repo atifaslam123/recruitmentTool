@@ -1,0 +1,18 @@
+<sd-card class="sdCard">
+  <sd-card-header title="Test login" class="sdCardHeader">
+  </sd-card-header>
+  <sd-card-body>
+    <div class="center">
+    <div class="d-flex justify-content-center">
+      <H1>Enter your email address</H1>
+    </div>
+    <div class="d-flex justify-content-center">
+      <div class="form-group row">
+        <label class="col-form-label col-form-label-lg">Email</label>
+        <input #email class="form-control-lg" placeholder="Enter Email address" type="text" autofocus (keyup.enter)="submit(email.value)">
+        <button class="btn sd-btn btn-raised primary" (click)="submit(email.value)">Submit</button>
+      </div>
+    </div>
+  </div>
+  </sd-card-body>
+</sd-card>

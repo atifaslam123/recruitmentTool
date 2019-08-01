@@ -1,0 +1,198 @@
+<div class="" style=" display: block; margin-left: auto; margin-right: auto;">
+
+  <div class="modal-header">
+    <h4 class="modal-title">CREATING A QUESTION</h4>
+    <button type="button" class="close" aria-label="Close" (click)="return()" style="float: right;">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body d-flex justify-content-center">
+
+    <form [formGroup]="addQuestionForm" #myForm="ngForm">
+      <!-- <div class="form-group row">
+          <label class="col-sm-3 col-form-label">Question Name</label>
+          <div class="col-sm-7"><input formControlName="question_name" class="form-control" type="text" #question_name
+              required></div>
+        </div> -->
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Question</label>
+        <div class="col-sm-7"><input formControlName="questionText" class="form-control" type="text" #questionText
+            required></div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label ">Question Image</label>
+        <div class="col-sm-7"><input #questionImage type="file" (change)="fileChangeEvent($event)"
+            placeholder="Upload file..." /><br />
+
+          <!-- <button type="button" (click)="upload()">Upload</button>
+            <button type="button" (click)="cancelUpload()">Cancel</button> -->
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Difficulty</label>
+        <div class="col-sm-7" #difficulty>
+
+          <div class="sd-form-check">
+            <label class="sd-form-check-label">
+              <input name="difficulty" formControlName="difficulty" value="1" type="radio" [checked]="difficulty == 1"
+                (change)="onSelectionChange(1)"><i class="dark-white">
+              </i> Easy </label>
+          </div>
+          <div class="sd-form-check">
+            <label class="sd-form-check-label">
+              <input name="difficulty" formControlName="difficulty" value="2" type="radio" [checked]="difficulty == 2"
+                (change)="onSelectionChange(2)"><i class="dark-white">
+              </i> Medium </label>
+          </div>
+          <div class="sd-form-check">
+            <label class="sd-form-check-label">
+              <input name="difficulty" formControlName="difficulty" value="3" type="radio" [checked]="difficulty == 3"
+                (change)="onSelectionChange(3)"><i class="dark-white">
+              </i> Hard </label>
+          </div>
+          <div class="sd-form-check">
+            <label class="sd-form-check-label">
+              <input name="difficulty" formControlName="difficulty" value="4" type="radio" [checked]="difficulty == 4"
+                (change)="onSelectionChange(4)"><i class="dark-white">
+              </i> Very Hard </label>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Question Type</label>
+        <div class="col-sm-7" #questionType required>
+
+          <div class="sd-form-check">
+            <label class="sd-form-check-label">
+              <input name="questionType" formControlName="questionType" value="single_answer" type="radio"
+                [checked]="questionType == single_answer" (change)="onSelectionChangeType('single_answer')"><i
+                class="dark-white">
+              </i> Single Answer </label>
+          </div>
+          <div class="sd-form-check">
+            <label class="sd-form-check-label">
+              <input name="questionType" formControlName="questionType" value="multiple_answer" type="radio"
+                [checked]="questionType == multiple_answer" (change)="onSelectionChangeType('multiple_answer')"><i
+                class="dark-white">
+              </i> Multiple Answers </label>
+          </div>
+
+
+
+        </div>
+      </div>
+
+
+
+      <div *ngIf="checked" class="form-group row">
+        <label class="col-sm-3 col-form-label">Answers</label>
+        <div class="col-sm-5"><input formControlName="answer1" class="form-control" type="text" #firstAnswer
+            (keyup)=onKeyFirstAnswer(firstAnswer.value)></div>
+        <div class="form-group row " style="float: right;">
+
+          <button [ngClass]="{ 'btn secondary mx-1':!toggleFirst,'btn sd-btn btn-raised success btn-sm': toggleFirst}"
+            (click)="correctAnswerFirst()">Correct</button>
+          <div *ngIf="!secondAnswer">
+            <button class="btn primary mx-1 button5" (click)="addSecondAnswer()">+</button>
+
+          </div>
+          <!-- [ngClass]="{'btn sd-btn btn-raised success':toggle, 'btn secondary mx-1':!toggle}" -->
+        </div>
+      </div>
+
+      <div *ngIf="secondAnswer" class="form-group row">
+        <label class="col-sm-3 col-form-label">Answers</label>
+        <div class="col-sm-5"><input formControlName="answer2" class="form-control" type="text" #secondAnswer
+            (keyup)=onKeySecondAnswer(secondAnswer.value)></div>
+        <div class="form-group row " style="float: right;">
+
+          <button [ngClass]="{ 'btn secondary mx-1':!toggleSecond,'btn sd-btn btn-raised success btn-sm': toggleSecond}"
+            (click)="correctAnswerSecond()">Correct</button>
+          <div *ngIf="!thirdAnswer">
+            <button class="btn primary mx-1 button5" (click)="addThirdAnswer()">+</button>
+            <button class="btn secondary mx-2 button5" (click)="removeSecondAnswer(); ">X</button>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="thirdAnswer" class="form-group row">
+        <label class="col-sm-3 col-form-label">Answers</label>
+        <div class="col-sm-5"><input formControlName="answer3" class="form-control" type="text" #thirdAnswer
+            (keyup)=onKeyThirdAnswer(thirdAnswer.value)></div>
+        <div class="form-group row " style="float: right;">
+
+          <button [ngClass]="{ 'btn secondary mx-1':!toggleThird,'btn sd-btn btn-raised success btn-sm': toggleThird}"
+            (click)="correctAnswerThird()">Correct</button>
+          <div *ngIf="!fourthAnswer">
+            <button class="btn primary mx-1 button5" (click)="addFourthAnswer()">+</button>
+            <button class="btn secondary mx-2 button5" (click)="removeThirdAnswer()">X</button>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="fourthAnswer" class="form-group row">
+        <label class="col-sm-3 col-form-label">Answers</label>
+        <div class="col-sm-5"><input formControlName="answer4" class="form-control" type="text" #fourthAnswer
+            (keyup)=onKeyFourthAnswer(fourthAnswer.value)></div>
+        <div class="form-group row " style="float: right;">
+
+          <button [ngClass]="{ 'btn secondary mx-1':!toggleFourth,'btn sd-btn btn-raised success btn-sm': toggleFourth}"
+            (click)="correctAnswerFourth()">Correct</button>
+          <button class="btn secondary mx-2 button5" (click)="removeFourthAnswer();">X</button>
+        </div>
+
+      </div>
+
+
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Department</label>
+        <div class="col-sm-7">
+          <div class="input-group mb">
+            <select formControlName="department" class="form-control" #department>
+
+              <option selected="selected" hidden="hidden"></option>
+              <option>IT</option>
+              <option>HR</option>
+              <option>Operations</option>
+
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Question Category</label>
+        <div class="col-sm-7">
+          <div class="input-group mb">
+            <select formControlName="category_ID" class="form-control" #category_ID>
+
+              <option selected="selected" hidden="hidden"></option>
+
+              <option [value]="category.ID" *ngFor="let category of question.categories;">
+                {{category.category_name}}
+              </option>
+              <!-- <input formControlName="category" placeholder="category"> -->
+
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Question Weight</label>
+        <div class="col-sm-7"><input formControlName="questionWeight" class="form-control" type="number" min="1" max="4"
+            #questionWeight></div>
+      </div>
+      <div class="form-group row d-flex justify-content-center">
+        <!-- <button class="btn secondary mx-1" (click)="return()">RETURN</button> -->
+        <button [disabled]="submitted" class="btn primary mx-1"
+          (click)="submitData({question_name: 'empty', questionImage: questionImage.value, questionText: questionText.value, category_ID: category_ID.value, department: department.value, questionWeight: questionWeight.value});upload(); ">
+          SUBMIT</button>
+        <button class="btn primary mx-1"
+          (click)="submitDataAnother({question_name: 'empty', questionImage: questionImage.value, questionText: questionText.value, category_ID: category_ID.value, department: department.value, questionWeight: questionWeight.value}); myForm.reset() ">
+          CREATE ANOTHER</button>
+
+
+      </div>
+    </form>
+
+  </div>

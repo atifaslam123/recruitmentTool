@@ -1,0 +1,42 @@
+<span>{{test.question}}</span>
+
+<div *ngFor="let answers of test.test;">
+
+  <div *ngIf="answers.correct == 'correct'">
+    <div class="sd-form-check disabled"><label class="sd-form-check-label"><input class="form-check-input" disabled=""
+          checked="" type="checkbox" value=""><i class="dark-white"></i>
+        {{ answers.answerText }} </label>
+      <span class="ml">
+        <i class="pl px circle success">Correct</i>
+      </span>
+    </div>
+  </div>
+
+  <div *ngIf="answers.correct == 'incorrect'">
+    <div class="sd-form-check disabled"><label class="sd-form-check-label"><input class="form-check-input strong"
+          disabled="" checked="" type="checkbox" value=""><i class="dark-white"></i>
+        {{ answers.answerText }} </label>
+      <span class="ml">
+        <i class="pl px circle danger">Incorrect</i>
+      </span>
+    </div>
+  </div>
+
+  <div *ngIf="answers.correct == 'correct answer'">
+    <div class="sd-form-check disabled"><label class="sd-form-check-label"><input class="form-check-input strong"
+          disabled="" type="checkbox" value=""><i class="dark-white"></i>
+        {{ answers.answerText }} </label>
+      <span class="ml ">
+        <i class="pl px circle success">Correct Answer</i>
+      </span>
+    </div>
+  </div>
+
+  <div *ngIf="answers.correct  == ' '">
+    <div class="sd-form-check disabled"><label class="sd-form-check-label"><input class="form-check-input" disabled=""
+          type="checkbox" value=""><i class="dark-white"></i>
+        {{ answers.answerText}} </label>
+    </div>
+  </div>
+
+</div>

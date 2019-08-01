@@ -1,0 +1,140 @@
+<div *ngFor="let user of user.selectedUser">
+  <div class="" style=" display: block; margin-left: auto; margin-right: auto;">
+
+    <div class="modal-header justify-content-center">
+      <h4 class="modal-title">EDITING A USER</h4>
+      <button type="button" class="close" aria-label="Close" (click)="return()" style="float: right;">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body justify-content-center">
+
+      <form [formGroup]="editUserForm">
+        <!-- <div *ngFor="let user of user.userProfile"> -->
+        <!-- <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Username</label>
+                  <div class="col-sm-5"><input class="form-control" formControlName="username" type="text" value="{{user.username}}" #username
+                      required></div>
+                </div>
+                <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Password</label>
+                  <div class="col-sm-5"><input class="form-control" formControlName="password" type="password" value="{{user.password}}" #password
+                    required>
+                   </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">First name</label>
+                <div class="col-sm-5"><input class="form-control" formControlName="firstName" type="text" value="{{user.first_name}}" #firstName required>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Last name</label>
+                <div class="col-sm-5">
+                  <input class="form-control" formControlName="lastName" type="text" value="{{user.last_name}}" #lastName required>
+                </div>
+              </div> -->
+
+        <!-- <div class="form-group row">
+                <label class="col-sm-5 col-form-label">Department</label>
+                <div class="col-sm-7">
+                  <div class="input-group mb">
+                    <select class="form-control" #department>
+  
+                      <option selected="selected" hidden="hidden">{{user.department}}</option>
+                      <option>IT</option>
+                      <option>HR</option>
+                      <option>Operations</option>
+  
+                    </select>
+                  </div>
+                </div>
+              </div> -->
+
+
+
+        <!-- <div class="form-group row">
+                <label class="col-sm-5 col-form-label">Position</label>
+                <div class="col-sm-7">
+                  <input class="form-control" #position type="text" value="{{user.position}}">
+                </div>
+              </div> -->
+        <br>
+        <div class="form-group row">
+          <label class="col-sm-5 col-form-label">Department</label>
+          <div class="form-group row col-md-6">
+            <div class="input-group mb">
+              <select (change)="teamsService.setDepartment($event.target.value)" formControlName="department"
+                #department>
+                <option selected="selected"  hidden="hidden">{{user.department}}</option>
+                <option [value]="x.department" *ngFor="let x of teamsService.departments;">
+                  {{x.department}}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+
+        
+        <div class="form-group row">
+          <label class="col-sm-5 col-form-label">Subdepartment </label>
+          <div class="form-group row col-sm-6">
+            <div class="input-group mb">
+              <select (change)="teamsService.setSubdepartment($event.target.value)" formControlName="subdepartment"
+                #subdepartment>
+                <option selected="selected"  hidden="hidden">{{user.subdepartment}}</option>
+                <option [value]="team.subdepartment" *ngFor="let team of teamsService.subdepartments;">
+                  {{team.subdepartment}}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <br>
+
+        <div class="form-group row">
+          <label class="col-sm-5 col-form-label">Position</label>
+          <div class="col-sm-5">
+            <div class="input-group mb">
+              <select class="form-control input-c" formControlName="position" #position>
+
+                <option selected="selected" hidden="hidden">{{user.position}}</option>
+                <option [value]="position.ID" *ngFor="let position of positions;">
+                  {{position.position_name}}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-5 col-form-label">Role</label>
+          <div class="col-sm-5">
+            <div class="input-group mb">
+              <select class="form-control" #role>
+
+                <option selected="selected" hidden="hidden">{{user.role}}</option>
+                <option>Super Admin</option>
+                <option>Admin</option>
+                <option>Team Leader</option>
+                <option>Normal User</option>
+
+              </select>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-5">
+                  <input class="form-control" formControlName="email" #email type="email" value="{{user.email}}" required>
+                </div>
+              </div> -->
+        <div class="form-group row " style="float: center; padding-left: 50%;">
+          <!-- <button class="btn secondary mx-1" (click)="return()">RETURN</button> -->
+          <button [disabled]="submitted" class="btn primary m-1"
+            (click)="submitData({ID: user.ID,  department: department.value, subdepartment: subdepartment.value, position: position.value, role: role.value})">SUBMIT</button>
+
+        </div>
+      </form>
+    </div>
+  </div>

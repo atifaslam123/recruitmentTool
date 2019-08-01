@@ -1,0 +1,285 @@
+<!--
+  The page on which all of the applicants will be displayed.
+  As of now the elements are displayed on the SD Worx cards.
+  Should probably be scrollable, filterable and sortable.
+-->
+
+<sd-card class="sdCard">
+  <sd-card-body>
+    <!---->
+    <div class="row">
+      <div class="col-md-2">
+        <sd-sidebar sidebarFoldedMdDown="true">
+          <sd-sidebar-header-item name="Filter by..."></sd-sidebar-header-item>
+
+          <!-- <sd-sidebar-item routerLink="/applicants" name="Department" navIcon="icons8-department" navBadgeValue="3"
+            navBadgeClass="primary">
+            <sd-subnav>
+              <div class="sd-form-check ml-5">
+                <li>
+                  <label class="sd-form-check-label">
+                    <input type="checkbox" [(ngModel)]="applicant.filter.Support"
+                      (ngModelChange)="applicant.filterChange()">
+                    <i class="dark-white"></i> Support
+                  </label>
+                </li>
+                <li>
+                  <label class="sd-form-check-label">
+                    <input type="checkbox" [(ngModel)]="applicant.filter.HR" (ngModelChange)="applicant.filterChange()">
+                    <i class="dark-white"></i> HR
+                  </label>
+                </li>
+                <li>
+                  <label class="sd-form-check-label">
+                    <input type="checkbox" [(ngModel)]="applicant.filter.IT" (ngModelChange)="applicant.filterChange()">
+                    <i class="dark-white"></i> IT
+                  </label>
+                </li>
+              </div>
+
+            </sd-subnav>
+
+          </sd-sidebar-item> -->
+
+          <sd-sidebar-item routerLink="/applicants" name="Position" navIcon="icons8-settings" navBadgeValue="3"
+            navBadgeClass="primary">
+            <sd-subnav>
+              <div class="sd-form-check ml-5">
+                <li>
+                  <label class="sd-form-check-label">
+                    <input type="checkbox" [(ngModel)]="applicant.filter.manager"
+                      (ngModelChange)="applicant.filterChange()">
+                    <i class="dark-white"></i>Manager
+                  </label>
+                </li>
+                <li>
+                  <label class="sd-form-check-label">
+                    <input type="checkbox" [(ngModel)]="applicant.filter.softwareengineer"
+                      (ngModelChange)="applicant.filterChange()">
+                    <i class="dark-white"></i>Software Engineer
+                  </label>
+                </li>
+                <li>
+                  <label class="sd-form-check-label">
+                    <input type="checkbox" [(ngModel)]="applicant.filter.trainee"
+                      (ngModelChange)="applicant.filterChange()">
+                    <i class="dark-white"></i>Trainee
+                  </label>
+                </li>
+              </div>
+
+            </sd-subnav>
+
+          </sd-sidebar-item>
+
+          <!---->
+        </sd-sidebar>
+      </div>
+
+      <div class="col-md-10" style="overflow-x: auto; overflow-y:hidden;">
+        <div class="h-full">
+          <div class="card-body">
+            <sd-page-title ng-reflect-title="list of applicants">
+              <span class="page-heading text-primary pt">LIST OF APPLICANTS</span>
+
+              <button *ngIf="authUser.isAdmin || authUser.isSuperAdmin" type="button" (click)="addApplicants()"
+                class="btn btn-raised btn-with-icon btn-outline accent" style="float: right">
+                <i class="icons8-add-user-male"></i>
+                <span>Add Applicant</span>
+              </button>
+              <!-- <table>
+
+                <tr *ngFor="let item of data">
+
+              </table> -->
+            </sd-page-title>
+
+
+            <div class="c-search mb">
+              <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+                placeholder="Search...">
+            </div>
+
+            <!-- <div class="form-group row"><h3 class=" col-form-label">Order by:</h3>
+              <div class="col-sm-10">
+                <div class="row mb"></div>
+                <div class="form-check form-check-inline"><input class="form-check-input" id="testResult"
+                    name="inlineRadioOptions" type="radio" value="testResult" (change) ="order($event.target.value)">
+                  <label class="form-check-label" for="testResult">Test result</label>
+                </div>
+                <div class="form-check form-check-inline"><input class="form-check-input" id="dateAdded"
+                    name="inlineRadioOptions" type="radio" value="dateAdded" (change) ="order($event.target.value)">
+                  <label class="form-check-label" for="dateAdded">Date added</label>
+                </div>
+              </div>
+            </div> -->
+
+            <div class="row" style="float: right;">
+              <div class="col">
+                <button *ngIf="authUser.isSuperAdmin" (click)="exportAsXLSX()"
+                  class="btn btn-raised btn-with-icon btn-outline accent">
+                  <i class="icons8-microsoft-excel"></i>
+                  <span>Generate Applicant's list</span>
+                </button>
+
+                <div class="divider"></div>
+
+                <div ngbDropdown class="d-inline-block ">
+                  <button class="btn btn-outline-secondary" id="dropdownBasic1" ngbDropdownToggle>Order by</button>
+                  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                    <button ngbDropdownItem (click)="order($event.target.value)" value="testResult">Test
+                      results</button>
+                    <button ngbDropdownItem (click)="order($event.target.value)" value="dateAdded">Date added</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <br><br>
+
+            <!--      <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th># -->
+            <!--table with all of the applicants
+                        should contact the api to *ngfor through all of the applicants that need to be displayed
+                        The ID should be retrievable from this row again when clicked to load applicantprofile-->
+            <!-- </th>
+                  <th>
+                    Name
+                  </th>
+                  <th>
+                    Function
+                  </th>
+                  <th>
+                    status in application process
+                  </th>
+                  <th>
+                    department
+                  </th>
+                </tr>
+              </thead>
+  
+              <tbody>
+                <tr *ngFor="let applicant of applicant.applicants" (click)="details(applicant.ID)" >
+                  <td >{{ applicant.ID }}</td>
+                  <td>{{ applicant.first_name + " " + applicant.last_name }}</td>
+                  <td>{{ applicant.position }}</td>
+                  <td>{{ applicant.statusRecruitment }}</td>
+                  <td>{{ applicant.department }}</td>
+                </tr>
+              </tbody>
+            </table> 
+  
+            style="background-color: #f2f2f4"
+            <p>
+          </div> -->
+
+            <!-- <div *ngFor="let i = index; let applicant of applicant.filteredApplicants | filter:searchText;"
+              [attr.data-index]="i" (click)="details(applicant.ID)"> -->
+
+            <div *ngFor="let applicant of applicant.filteredApplicants | filter:searchText; index as i">
+              
+
+              <!-- <div class="list-group-item d-flex flex-column ng-star-inserted"
+                [style.background]="selectedRow == i? 'white' : '#f2f2f4'"
+                [style.border-color]="selectedRow == i? '#c8c9c7' : ''"> -->
+              <div class="list-group-item d-flex flex-column ng-star-inserted "
+                [ngStyle]="{backgroundColor: hover==true && selectedIndex==i  ? '#f2f2f4' : 'white' }"
+                (mouseover)="hovering(i)" (mouseleave)="notHovering(i)">
+                <div class="d-flex flex-nowrap">
+                  <div class="">
+                    <div class="ml">
+
+                      <div class="block">
+                        <span
+                          class="_500 text-primary">{{ applicant.ID + ". " + applicant.first_name + " " + applicant.last_name }}</span>
+                        <!-- <small class="_500">Position: </small> -->
+                        <small class="block my_500"><i>Position: {{ applicant.position }}</i></small>
+                      </div>
+
+                      <div class="block">
+                        <span class="_500">Department: </span>
+                        <span>{{applicant.department}}</span>
+                      </div>
+
+                      <div class="block">
+                        <span class="_500">Status in recruitment: </span>
+                        <span>{{applicant.statusRecruitment}}</span>
+                      </div>
+
+                      <div style="display: inline-flex">
+
+                        <div *ngIf="applicant.dateTimeTaken; else noTestTaken">
+                          <div class="block">
+                            <span class="_500">Test: </span>
+                            <span>{{applicant.profile_name}}</span>
+                            <span class="_500"> Test Result: </span>
+                            <span>{{(applicant.testResult*100).toFixed(1)}}%</span>
+                            <span class="_500"> Test Date: </span>
+                            <span>{{applicant.dateTimeTaken.split("T",1)}}</span>
+                          </div>
+                        </div>
+
+                        <ng-template class="block" #noTestTaken>
+                          <div *ngIf="applicant.profile_name">
+                            <span class="_500">Test Scheduled: </span>
+                            <span>{{applicant.profile_name}}</span>
+                          </div>
+                        </ng-template>
+
+                        <div class="d-flex flex-nowrap" style="position: absolute; right: 10px; bottom: 3px">
+
+                          <div class="mx-1">
+                            <a class="circle w-35 btn btn-with-icon white" data-toggle="tooltip" data-placement="bottom"
+                              title="Applicant's profile" (click)="test(applicant.ID)">
+                              <i class="icons8-contacts"></i>
+                            </a>
+                          </div>
+
+                          <div class="mx-1 mb-1" style="color:white;">
+                            <a *ngIf="authUser.isAdmin || authUser.isSuperAdmin "
+                              class="primary circle w-35 btn btn-with-icon" data-toggle="tooltip"
+                              data-placement="bottom" title="update notes" (click)=updateNotes(applicant)>
+                              <i class="icons8-edit-file "></i>
+                            </a>
+                          </div>
+
+                          <div class="mx-1 mb-1" style="color:white;">
+                            <a *ngIf="authUser.isAdmin || authUser.isSuperAdmin"
+                              class="secondary circle w-35 btn btn-with-icon" data-toggle="tooltip"
+                              data-placement="bottom" title="Phases" (click)=applicantStatus(applicant.ID)>
+                              <i class="icons8-timeline"></i>
+                            </a>
+                          </div>
+
+                          <div class="mx-1 mb-1" style="color:white;">
+                            <a *ngIf="authUser.isAdmin || authUser.isSuperAdmin"
+                              class="grey circle w-35 btn btn-with-icon" data-toggle="tooltip" data-placement="bottom"
+                              title="Delete profile" (click)="delete(applicant.ID)">
+                              <i class="icons8-trash"></i>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <br>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <sd-body-content-footer>
+        <div id="sd-body-content-footer" class="d-flex justify-content-center mx px-5 mb ">
+          <span class="pt text-muted">Copyright © 2019 sdworx</span></div>
+      </sd-body-content-footer>
+
+    </div>
+  </sd-card-body>
+</sd-card>

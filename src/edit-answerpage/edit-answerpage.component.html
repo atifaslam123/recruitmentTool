@@ -1,0 +1,45 @@
+
+  <div class="" style=" display: block;margin-left: auto;margin-right: auto;">
+    <div class="modal-header justify-content-center">
+      <h4 class="modal-title">EDITING A QUESTION PROFILE</h4>
+      <button type="button" class="close" aria-label="Close" (click)="return()" style="float: right;">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <div class="modal-body justify-content-center">
+
+      <form [formGroup]="editAnswerForm">
+        <div *ngFor="let answer of answers;index as i">
+
+            <div  class="form-group row">
+                <label class="col-sm-3 col-form-label">Answers</label>
+                <div class="col-sm-5"><input  class="form-control" type="text" #editedAnswer
+                    value="{{answer.answerText}}" (keyup)=onKeyAnswer(answer.ID,editedAnswer.value)></div>
+                <div class="form-group row " style="float: right;">
+        
+                  <button [ngClass]="{ 'btn secondary mx-1':!answer.correct,'btn sd-btn btn-raised success btn-sm': answer.correct}"
+                    (click)="correctAnswer(answer.ID)">Correct</button>
+                    <div >
+                      <button class="btn secondary mx-2 button5" (click)="deleteAnswer(answer.ID)">X</button>
+                    </div>
+                  <!-- [ngClass]="{'btn sd-btn btn-raised success':toggle, 'btn secondary mx-1':!toggle}" -->
+                </div>
+              </div>
+        
+
+
+
+
+        </div>
+        <div class="form-group row d-flex justify-content-center " >
+            <button [disabled]="submitted" class="btn primary mx-1"
+              (click)="submitAnswer()">
+              SUBMIT</button>
+              <!-- <button (click)="test()">TEST</button> -->
+          </div>
+      </form>
+
+    </div>
+  </div>
+  

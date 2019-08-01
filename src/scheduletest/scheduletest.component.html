@@ -1,0 +1,48 @@
+<div>
+  <div class="modal-header">
+    <h4 class="modal-title">Select Test</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="d-flex justify-content-center">
+      <div class="form-group row col-md-6">
+        <label class=" col-form-label">Select Department</label>
+        <select class="form-control input-c" (change)="scheduleTest.setDepartment($event.target.value)">
+          <option value=0>Any</option>
+          <option [value]="x.department" *ngFor="let x of scheduleTest.departments;">
+            <div>{{x.department}}</div>
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <div class="form-group row col-md-6">
+        <label class=" col-form-label">Select Subdepartment</label>
+        <select class="form-control input-c" (change)="scheduleTest.setSubdepartment($event.target.value)">
+          <option value=0>Any</option>
+          <option [value]="team.ID" *ngFor="let team of scheduleTest.subdepartments;">
+            {{team.subdepartment}}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <div class="form-group row col-md-6">
+        <label class=" col-form-label">Select Test</label>
+        <select class="form-control input-c" (change)="scheduleTest.setTest($event.target.value)">
+          <option selected="selected">Select test</option>
+          <option [value]="test.ID" *ngFor="let test of scheduleTest.availableTests;">
+            {{test.ID +":   " +test.profile_name}}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer d-flex justify-content-center">
+    <button type="button" class="btn sd-btn btn-raised primary" (click)="onConfirmClick()">Schedule test</button>
+  </div>
+</div>

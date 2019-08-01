@@ -1,0 +1,110 @@
+<sd-card class="sdCard">
+
+  <sd-card-body>
+    <div class="" style=" display: block; margin-left: auto; margin-right: auto;">
+      <div class="center">
+          <button type="button" (click)="editPassword()" class="btn btn-raised btn-with-icon btn-outline accent"
+          style="float: right">
+          <i class="icons8-edit"></i>
+          <span>Edit Password</span>
+        </button>
+          <!-- <sd-page-title ng-reflect-title="your profile"> -->
+              <div class="modal-header justify-content-center">
+                  <h4 class="modal-title" style="color: #7c2855; padding-left: 150px; font-size: 30px">YOUR PROFILE  </h4>
+            </div>
+            <!-- </sd-page-title> -->
+            <div class="modal-body justify-content-center">
+            
+                <sd-card-body>
+        <form [formGroup]="selectedUserForm" _ngcontent-edn-c5 >
+            <!-- <div class="form-group row d-flex justify-content-center"> -->
+              
+          <!-- <div class="form-group row">
+            <label class="col-form-label">Username</label>
+            <div>
+              <input formControlName="username" class="form-control" #username type="text" value="{{userData.username}}"
+                required>
+            </div>
+          </div> -->
+          
+          <!-- <div _ngcontent-edn-c5="" class="form-group row">
+            <label _ngcontent-edn-c5="" class="col-sm-5 col-form-label" >Username</label>
+            <div _ngcontent-edn-c5="" class="col-sm-3">
+              <input _ngcontent-edn-c5="" formControlName="username" class="form-control" #username type="text" value="{{userData.username}}"
+              required>
+            </div>
+        </div> -->
+        <div _ngcontent-edn-c5="" class="form-group row">
+          <label _ngcontent-edn-c5="" class="col-sm-5 col-form-label" >Email</label>
+          <div _ngcontent-edn-c5="" class="col-sm-7">
+            <input _ngcontent-edn-c5="" disabled class="form-control" formControlName="email" #email type="email"   value="{{userData.email}}"
+            required>
+          </div>
+      </div>
+
+        <div _ngcontent-edn-c5="" class="form-group row">
+            <label _ngcontent-edn-c5="" class="col-sm-5 col-form-label" >First Name</label>
+            <div _ngcontent-edn-c5="" class="col-sm-7">
+              <input _ngcontent-edn-c5="" formControlName="first_name" class="form-control" #first_name type="text"
+              value="{{userData.first_name}}" required>
+            </div>
+        </div>
+
+        <div _ngcontent-edn-c5="" class="form-group row">
+            <label _ngcontent-edn-c5="" class="col-sm-5 col-form-label" >Last Name</label>
+            <div _ngcontent-edn-c5="" class="col-sm-7">
+              <input _ngcontent-edn-c5="" formControlName="last_name" class="form-control" #last_name type="text"
+              value="{{userData.last_name}}" required>
+            </div>
+        </div>
+
+       
+
+
+        <!-- </div> -->
+          <!-- <div class="form-group row">
+          <label class=" col-form-label">Password</label>
+          <div>
+            <input formControlName="password" class="form-control" #password type="password" value="{{user.password}}" required>
+          </div>
+        </div> -->
+        <!-- <div class="form-group row d-flex justify-content-center"> -->
+          <!-- <div class="form-group row">
+            <label class="  col-form-label ">First Name</label>
+            <div>
+              <input formControlName="first_name" class="form-control" #first_name type="text"
+                value="{{userData.first_name}}" required>
+            </div>
+          </div> -->
+        <!-- </div> -->
+          <!-- <div class="form-group row d-flex justify-content-center"> -->
+          <!-- <div class="form-group row">
+            <label class=" col-form-label">Last Name</label>
+            <div>
+              <input formControlName="last_name" class="form-control" #last_name type="text"
+                value="{{userData.last_name}}" required>
+            </div>
+          </div> -->
+        <!-- </div> -->
+          <!-- <div class="form-group row d-flex justify-content-center"> -->
+          <!-- <div class="form-group row">
+            <label class="col-form-label" >Email</label>
+            <div>
+              <input class="form-control" formControlName="email" #email type="email"   value="{{userData.email}}"
+                required>
+            </div>
+          </div> -->
+              
+<br>
+
+          <div class="form-group row d-flex justify-content-center">
+            <button class="btn sd-btn btn-raised primary"
+              (click)="updateData({ID: userData.ID,  first_name :first_name.value, last_name : last_name.value })">Update</button>
+          </div>
+        </form>
+      </sd-card-body>
+      </div>
+      </div>
+    </div>
+  </sd-card-body>
+</sd-card>

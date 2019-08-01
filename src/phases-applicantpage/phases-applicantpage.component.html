@@ -1,0 +1,117 @@
+<div class="modal-content" style="display: block;margin-left: auto;margin-right: auto; height: auto;">
+  <div class="modal-header justify-content-center">
+    <h4 class="modal-title">EDITING AN APPLICANT'S RECRUITMENT STATUS</h4>
+    <button type="button" class="close" aria-label="Close" (click)="return()" style="float: right;">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body justify-content-center" style="height: auto">
+
+    <div class="row">
+      <div class="col-md-6">
+        <h4 class="_500 text-primary">Phone Interview</h4>
+
+        <div cdkDropList #phoneInterviewList="cdkDropList" [cdkDropListData]="phoneInterview"
+          [cdkDropListConnectedTo]="[firstInterviewList, recruitedList, rejectedList]"
+          style="border: solid 1px #ccc; height: 90px; background: white; border-radius: 4px; overflow: hidden;display: block;"
+          (cdkDropListDropped)="drop($event, 'Phone Interview')">
+          <div class="list-group-item flex-column ng-star-inserted active" *ngFor="let applicant of phoneInterview"
+            cdkDrag>
+            <div class="icons8-contacts">
+              <span class="ml-2">{{applicant.first_name + " " + applicant.last_name}}</span>
+            </div>
+
+            <div class="icons8-department">
+              <span class="ml-2">{{ applicant.department }}</span>
+            </div>
+            <div class="icons8-settings">
+              <span class="ml-2">{{ applicant.position }}</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <h4 class="_800 text-primary">First Interview</h4>
+
+        <div cdkDropList #firstInterviewList="cdkDropList" [cdkDropListData]="firstInterview"
+          [cdkDropListConnectedTo]="[phoneInterviewList, rejectedList, recruitedList]"
+          style="border: solid 1px #ccc; height: 90px; background: white; border-radius: 4px; overflow: hidden;display: block;"
+          (cdkDropListDropped)="drop($event, 'First Interview')">
+          <div class="list-group-item flex-column ng-star-inserted active" *ngFor="let applicant of firstInterview"
+            cdkDrag>
+            <div class="icons8-contacts">
+              <span class="ml-2">{{applicant.first_name + " " + applicant.last_name}}</span>
+            </div>
+
+            <div class="icons8-department">
+              <span class="ml-2">{{ applicant.department }}</span>
+            </div>
+            <div class="icons8-settings">
+              <span class="ml-2">{{ applicant.position }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+      <div class="col-md-6">
+        <h4 class="_500 text-primary">Recruited</h4>
+
+        <div cdkDropList #recruitedList="cdkDropList" [cdkDropListData]="recruited"
+          [cdkDropListConnectedTo]="[phoneInterviewList, firstInterviewList, rejectedList]"
+          style="border: solid 1px #ccc; height: 90px; background: white; border-radius: 4px; overflow: hidden;display: block;"
+          (cdkDropListDropped)="drop($event, 'Recruited')">
+          <div class="list-group-item flex-column ng-star-inserted active" *ngFor="let applicant of recruited" cdkDrag>
+            <div class="icons8-contacts">
+              <span class="ml-2">{{applicant.first_name + " " + applicant.last_name}}</span>
+            </div>
+
+            <div class="icons8-department">
+              <span class="ml-2">{{ applicant.department }}</span>
+            </div>
+            <div class="icons8-settings">
+              <span class="ml-2">{{ applicant.position }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <h4 class="_500 text-primary">Rejected</h4>
+
+        <div cdkDropList #rejectedList="cdkDropList" [cdkDropListData]="rejected"
+          [cdkDropListConnectedTo]="[phoneInterviewList, firstInterviewList, recruitedList]"
+          style="border: solid 1px #ccc; height: 90px; background: white; border-radius: 4px; overflow: hidden;display: block;"
+          (cdkDropListDropped)="drop($event, 'Rejected')">
+          <div class="list-group-item flex-column ng-star-inserted active" *ngFor="let applicant of rejected" cdkDrag>
+            <div class="icons8-contacts">
+              <span class="ml-2">{{applicant.first_name + " " + applicant.last_name}}</span>
+            </div>
+
+            <div class="icons8-department">
+              <span class="ml-2">{{ applicant.department }}</span>
+            </div>
+            <div class="icons8-settings">
+              <span class="ml-2">{{ applicant.position }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+  </div>
+</div>
+
+<!-- <sd-card-footer>
+    <div id="sd-body-content-footer" class="d-flex justify-content-center" style="bottom: 0; width: 100%;">
+      <span class="text-muted">Copyright © 2019 sdworx</span></div>
+  </sd-card-footer>
+ -->

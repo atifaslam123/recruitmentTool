@@ -1,0 +1,183 @@
+<sd-card class="sdCard">
+  <sd-card-body>
+
+
+    <div class="row">
+      <div class="col-md-2">
+
+        <sd-sidebar sidebarFoldedMdDown="true">
+          <sd-sidebar-header-item name="Filter by"></sd-sidebar-header-item>
+          <!-- <sd-sidebar-item routerLink="/questions" name="Department" navIcon="icons8-department" navBadgeValue="3"
+          navBadgeClass="primary">
+            <sd-subnav>
+
+              <div class="sd-form-check ml-5">
+                <label class="sd-form-check-label">
+                  <input type="checkbox" value="Support" [(ngModel)]="question.filter.Support"
+                    (ngModelChange)="question.filterChangeDepartment()">
+                  <i class="dark-white"></i> Support
+                </label>
+                <label class="sd-form-check-label">
+                  <input type="checkbox" [(ngModel)]="question.filter.HR" (ngModelChange)="question.filterChangeDepartment()">
+                  <i class="dark-white"></i> HR
+                </label>
+                <label class="sd-form-check-label">
+                  <input type="checkbox" [(ngModel)]="question.filter.IT" (ngModelChange)="question.filterChangeDepartment()">
+                  <i class="dark-white"></i> IT
+                </label>
+               
+
+              </div>
+            </sd-subnav>
+
+          </sd-sidebar-item> -->
+
+          <sd-sidebar-item routerLink="/questions" name="Difficulty" navIcon="icons8-dashboard-2" navBadgeValue="4"
+            navBadgeClass="primary">
+            <sd-subnav>
+              <div class="sd-form-check ml-5">
+                <label class="sd-form-check-label">
+                  <input type="checkbox" [(ngModel)]="question.filter.Easy"
+                    (ngModelChange)="question.filterChangeDifficulty()">
+                  <i class="dark-white"></i> Easy
+                </label>
+                <label class="sd-form-check-label">
+                  <input type="checkbox" [(ngModel)]="question.filter.Medium"
+                    (ngModelChange)="question.filterChangeDifficulty()">
+                  <i class="dark-white"></i> Medium
+                </label>
+                <label class="sd-form-check-label">
+                  <input type="checkbox" [(ngModel)]="question.filter.Hard"
+                    (ngModelChange)="question.filterChangeDifficulty()">
+                  <i class="dark-white"></i> Hard
+                </label><label class="sd-form-check-label">
+                  <input type="checkbox" [(ngModel)]="question.filter.VeryHard"
+                    (ngModelChange)="question.filterChangeDifficulty()">
+                  <i class="dark-white"></i> Very Hard
+                </label>
+              </div>
+            </sd-subnav>
+          </sd-sidebar-item>
+
+
+          <sd-sidebar-item routerLink="/questions" name="Category" navIcon="icons8-list" navBadgeValue="4"
+            navBadgeClass="primary">
+            <sd-subnav>
+              <div class="sd-form-check ml-5">
+                <label class="sd-form-check-label">
+                  <input type="checkbox" [(ngModel)]="question.filter.SQL"
+                    (ngModelChange)="question.filterChangeCategory()">
+                  <i class="dark-white"></i> SQL
+                </label>
+                <label class="sd-form-check-label">
+                  <input type="checkbox" [(ngModel)]="question.filter.Logic"
+                    (ngModelChange)="question.filterChangeCategory()">
+                  <i class="dark-white"></i> Logic
+                </label>
+                <label class="sd-form-check-label">
+                  <input type="checkbox" [(ngModel)]="question.filter.agile"
+                    (ngModelChange)="question.filterChangeCategory()">
+                  <i class="dark-white"></i> Agile
+                </label><label class="sd-form-check-label">
+                  <input type="checkbox" [(ngModel)]="question.filter.General_Knowledge"
+                    (ngModelChange)="question.filterChangeCategory()">
+                  <i class="dark-white"></i> General Knowledge
+                </label>
+              </div>
+            </sd-subnav>
+          </sd-sidebar-item>
+        </sd-sidebar>
+      </div>
+      <!---------------------------------------- sidebar end-------------------------------------------->
+
+
+      <div class="col-md-10" style="overflow-x: auto; overflow-y:hidden;">
+        <div class="h-full">
+          <div class="card-body">
+            <sd-page-title ng-reflect-title="list of questions">
+              <span class="page-heading text-primary pt">LIST OF QUESTIONS</span>
+              <button *ngIf="authUser.isAdmin || authUser.isSuperAdmin || authUser.isTeamLeader" type="button"
+                (click)="addQuestion()" class="btn btn-raised btn-with-icon btn-outline accent" style="float: right">
+                <i class="icons8-add-user-male"></i>
+                <span>Add Question</span>
+              </button>
+
+            </sd-page-title>
+
+
+            <div _ngcontent-c15="" class="c-search mb">
+              <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+                placeholder="Search...">
+            </div>
+
+            <div *ngFor="let question of question.filteredQuestions | filter:searchText; index as i">
+              <div class="list-group-item d-flex flex-column ng-star-inserted "
+                [ngStyle]="{backgroundColor: hover==true && selectedIndex==i  ? '#f2f2f4' : 'white' }"
+                (mouseover)="hovering(i)" (mouseleave)="notHovering(i)">
+                <div class="d-flex flex-nowrap">
+                  <div class="">
+                    <div class="ml">
+
+                      <div class="block">
+                        <span class="_500 text-primary">{{ i+1 + ". " + question.questionText + " "  }}</span>
+                        <small class="block my_500"><i>{{ "Difficulty: " }}</i>
+                          <span *ngIf="question.difficulty == 1" class=" text-muted">Easy</span>
+                          <span *ngIf="question.difficulty == 2" class=" text-muted">Medium</span>
+                          <span *ngIf="question.difficulty == 3" class=" text-muted">Hard</span>
+                          <span *ngIf="question.difficulty == 4" class=" text-muted">Very Hard</span>
+                        </small>
+                      </div>
+
+                      <div class="block">
+                        <span class="_500">Category: </span>
+                        <span>{{question.category}}</span>
+                      </div>
+
+                      <div style="display: inline-flex">
+
+                        <div class="block">
+                          <span class="_500">Department: </span>
+                          <span>{{question.department}}</span>
+                        </div>
+
+                        <div class="d-flex flex-nowrap" style="position: absolute; right: 10px; bottom: 3px">
+                          <div class="mx-1" style="color:white;">
+                            <a class="secondary circle w-35 btn btn-with-icon" data-toggle="tooltip"
+                              data-placement="bottom" title="Question's profile" (click)="details(question.ID);">
+                              <i class="icons8-document"></i>
+                            </a>
+                          </div>
+
+
+                          <div class="mx-1 mb-1" style="color:white;">
+                            <a *ngIf="authUser.isAdmin || authUser.isSuperAdmin || authUser.isTeamLeader"
+                              class="grey circle w-35 btn btn-with-icon" data-toggle="tooltip" data-placement="bottom"
+                              title="Delete profile" (click)="swalDelete(question.ID,i);">
+                              <!--clickMethod('question number ' + question.ID,question.ID)-->
+                              <i class="icons8-trash"></i>
+                            </a>
+                          </div>
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <br>
+
+            </div>
+          </div>
+        </div>
+
+        <sd-body-content-footer>
+          <div id="sd-body-content-footer" class="d-flex justify-content-center mx px-5 mb ">
+            <span class="pt text-muted">Copyright © 2019 sdworx</span></div>
+        </sd-body-content-footer>
+
+      </div>
+    </div>
+  </sd-card-body>
+</sd-card>
