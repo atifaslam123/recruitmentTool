@@ -1,0 +1,65 @@
+<div class="noscroll">
+  <!-- <div class="container-back" id="container-back" style="background-image: url(assets/images/loginpermanent4.png); background-size: 100% 100%; background-repeat: no-repeat;">  -->
+  <div class="container-back" id="container-back"
+    style="background-image: url(assets/images/back11.png);  background-size: 100% 100vh; background-repeat: no-repeat; position: relative;">
+    <div class="container" id="container" style="padding-top: 13.3%; padding-bottom: 22.3%;">
+      <!--style="padding-top: 13.3%; padding-bottom: 19%;"-->
+      <div class="row">
+
+        <div class="col-md-6 mx-auto">
+
+          <div class="card p-0">
+            <div style="background-image: url(assets/images/loginpermanent.png);">
+              <div class="card-body">
+
+                <form name="form" #f="ngForm">
+                  <h1 style="text-align:center; color:#7c2855; font-family: Metronic Slab Narrow; font-weight: bold">
+                    Login</h1>
+
+                  <div class="input-group mb-3">
+
+                    <input type="text" #username name="UserName" class="form-control sty1" placeholder="Email" required>
+                  </div>
+
+
+                  <div class="field">
+                    <input type="password" #password name="Password" class="form-control" passwordToggle
+                      placeholder="Password" required>
+                  </div>
+
+                  <div>
+                    <p style="color:#E92626;font-size:20px;font-weight:normal; align-content:left;" Class="success">
+                      {{errorMessage}}
+                    </p>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <button type="submit" class="btn btn-primary px-4"
+                        (click)="submit(username.value,password.value);">Login</button>
+                    </div>
+                    <!-- <div class="col-6 text-right">
+                    <a  routerLink="/forgot" >Forgot password?</a>
+                  <div class=""> -->
+                    <button type="button" class="btn btn-secondary px-4" routerLink="/applicantLogin">Take a
+                      Test</button>
+                  </div>
+                  <div class="col-3 text-right">
+                    <button type="button" class="btn btn-link px-0" routerLink="/forgot"  (click)="forget(username.value);">Forgot password?</button>
+
+                  </div>
+
+
+
+              </form>
+            </div>
+          </div>
+        </div>
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>

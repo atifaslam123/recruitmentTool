@@ -1,0 +1,33 @@
+<div id="container">
+
+  <div *ngIf="hrTool; else testingTool">
+    
+    <app-navbar *ngIf="showMenu"></app-navbar>
+    <div id="content">
+      <router-outlet>
+          <app-loading-screen></app-loading-screen>
+      </router-outlet>
+     
+        <sd-body-content-footer *ngIf="showMenu" ng-reflect-class-names="" >
+          <div id="sd-body-content-footer" class="d-flex justify-content-center">
+            <span class="pt text-muted">Copyright © 2019 sdworx </span>
+          </div>
+        </sd-body-content-footer>
+    </div>
+  </div>
+  <ng-template #testingTool>
+    <div class="content">
+      <app-topbar></app-topbar>
+      <router-outlet>
+
+      </router-outlet>
+      <app-sdcardfooter class="mt-auto"></app-sdcardfooter>
+    </div>
+  </ng-template>
+
+
+
+</div>
+<sd-toast [successTitle]="'SUCCESS'" [errorTitle]="'ERROR'" [infoTitle]="'Mind your time'" [warningTitle]="'WARNING'"
+  [positionClass]="'toast-bottom-full-width'" [defaultTimeout]="4000">
+</sd-toast>

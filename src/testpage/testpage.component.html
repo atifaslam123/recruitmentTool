@@ -1,0 +1,64 @@
+<sd-card class="sdCard">
+  <sd-card-header title="SD Worx test" class="sdCardHeader">
+  </sd-card-header>
+
+  <sd-card-body class="sdCardBody">
+
+    <div class="form-group row d-flex justify-content-center" >
+      <countdown  [config]="{leftTime: time, notify: [ 300, 60 ]}" #timer (finished)="endTest()"
+        (notify)="test.onNotify($event)" (event)="test.testMethod($event)" >
+        <h2 style="font-size: 1.8vw">Time Left: $!m!:$!s!</h2>
+      </countdown>
+
+      <div style="width: 1%"></div>
+
+      <p style="width: 50%;">
+        <ngb-progressbar type="info"
+          [value]="(test.testQuestions.length - (test.testQuestions.length-(test.currentQuestionNumber+1)))/test.testQuestions.length*100"
+          height="1.8vw" [striped]="true" [animated]="true">
+          <p></p>
+          <p style="font-size: 1.8vw; color: #4f5153">Question {{test.currentQuestionNumber+1}} out of
+            {{test.testQuestions.length}}</p>
+        </ngb-progressbar>
+      </p>
+    </div>
+
+    <div class="form-group row d-flex justify-content-center">
+      <div *ngIf="test.currentQuestion.questionImage != null">
+        <img [src]="test.imageExists()" class="image">
+      </div>
+    </div>
+
+    <div class="center-question">
+      <h1>Question {{test.currentQuestionNumber+1}}</h1><br />
+      <div class="left-within-center">
+        <label _ngcontent-c5="" class="sd-form-check-label questionText"> {{test.currentQuestion.questionText}}</label>
+        <br />
+        <label _ngcontent-c5="" class="sd-form-check-label questionType">({{test.currentQuestion.questionType}})</label>
+        <br />
+        <div class="fom-group">
+          <div _ngcontent-c25="" class="form-check" *ngFor="let answer of test.questionAnswers;">
+
+            <label _ngcontent-c5="" class="sd-form-check-label answerText">
+              <input _ngcontent-c5="" [type]="test.questionType(answer.questionType)" value=""
+                [checked]="test.givenAnswers.includes(answer.ID)" (click)="test.changeApplicantAnswers(answer)"><i
+                _ngcontent-c5="" class="dark-white"></i>
+              {{answer.answerText}}
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br />
+    <div class="form-group row d-flex justify-content-center" style="width:100%; bottom: 0%">
+      <button input (click)="previousQuestion()" [disabled]="test.currentQuestionNumber == 0"
+        class="btn sd-btn btn-raised primary">Previous Question</button>
+      <div style="width: 50%"></div>
+      <button type="button" class="btn sd-btn btn-raised secondary" input
+        (click)="nextQuestion(timer.config.leftTime, timer.left)">{{buttonText}}</button>
+    </div>
+
+  </sd-card-body>
+
+</sd-card>

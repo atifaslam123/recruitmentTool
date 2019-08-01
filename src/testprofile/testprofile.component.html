@@ -1,0 +1,74 @@
+<div class="row">
+  <div class="col-md-12">
+    <sd-card class="sdCard">
+      <sd-card-header class="p" title="QUESTION PROFILE"></sd-card-header>
+      <sd-card-body>
+
+        <div *ngFor="let testProfile of testProfileService.testProfile">
+          <span class="_600 text-primary">{{ testProfile.ID + ". " + testProfile.profile_name }}
+            <button *ngIf="authUser.isAdmin || authUser.isSuperAdmin || authUser.isTeamLeader" type="button"
+              (click)="edit()" class="btn btn-raised btn-with-icon btn-outline accent" style="float: right">
+              <i class="icons8-edit"></i>
+              <span>Edit Test Profile</span>
+            </button>
+          </span>
+
+          <hr>
+
+          <span class="_500">Test time: </span>
+          <span>{{testProfile.test_time}} minutes</span>
+          <div class="row">
+
+            <div class="card-body" style="width: 50%;">
+              <h2>Included questions: </h2>
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>type of questions</th>
+                    <th>difficulty</th>
+                    <th>Amount of questions</th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let segment of testProfileService.segments">
+                  <tr>
+                    <td>{{segment.category}}</td>
+                    <td>
+                      <span *ngIf="segment.difficulty == 1" class=" text-muted">Easy</span>
+                      <span *ngIf="segment.difficulty == 2" class=" text-muted">Medium</span>
+                      <span *ngIf="segment.difficulty == 3" class=" text-muted">Hard</span>
+                      <span *ngIf="segment.difficulty == 4" class=" text-muted">Very Hard</span> 
+                    </td>
+                    <td>{{segment.quantity}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="card-body" style="width: 50%;">
+              <h2>Available to: </h2>
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>department</th>
+                    <th>subdepartment</th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let team of testProfileService.teams">
+                  <tr>
+                    <td>{{team.department}}</td>
+                    <td>{{team.subdepartment}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </sd-card-body>
+
+
+      <!-- <sd-card-footer>
+        THE FOOTERS SHOULD REALLY BE UPDATED BY NOW
+      </sd-card-footer> -->
+    </sd-card>
+  </div>
+</div>

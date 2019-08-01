@@ -1,0 +1,69 @@
+<div class="row">
+  <div class="col-md-12">
+    <sd-card class="sdCard">
+      <sd-card-header class="p" title="USER'S PROFILE"></sd-card-header>
+      <sd-card-body>
+
+        <!-- <div *ngFor="let user of user.userProfile"> -->
+          <div *ngFor="let user of user.selectedUser">
+          <span class="_600 text-primary">{{ user.ID + ". " + user.first_name + " " + user.last_name }}
+            <div class="row" style="float: right">
+              <div>
+                <button type="button" (click)="editUsers()" class="btn btn-raised btn-with-icon btn-outline accent">
+                  <i class="icons8-edit"></i>
+                  <span>Edit User Details</span>
+                </button>
+              </div>
+              <div class="divider"></div>
+
+            </div>
+          </span>
+          <!-- <small class="block text-muted"><i>{{ user.position }}</i></small> -->
+
+          <hr>
+          <!-- <span class="text-color">Username: </span>
+          <span class="text-muted"><i>
+              {{ user.username}}</i></span>
+          <br><br> -->
+          <span class="text-color">Email: </span>
+          <span class="text-muted"><i>
+              {{ user.email}}</i></span>
+          <br><br>
+
+          <span class="text-color">Position: </span>
+          <span class="text-muted"><i>
+              {{ user.position}}</i></span>
+          <br><br>
+
+          <span class="text-color">Department: </span>
+          <span class="text-muted"><i>
+              {{ user.department}}</i></span>
+          <br><br>
+
+          <span class="text-color">Subepartment: </span>
+          <span class="text-muted"><i>
+              {{ user.subdepartment}}</i></span>
+          <br><br>
+
+          <span class="text-color">Role: </span>
+          <span class="text-muted"><i>
+              {{ user.role}}</i></span>
+          <br><br>
+
+          <!-- <span class="text-color">Email: </span>
+          <span class="text-muted"><i>
+              {{ user.email}}</i></span>
+          <br><br> -->
+
+        </div>
+
+
+      </sd-card-body>
+
+
+      <!-- <sd-card-footer>
+        Footer content, probably not very relevant for the most part
+      </sd-card-footer> -->
+    </sd-card>
+  </div>
+</div>
