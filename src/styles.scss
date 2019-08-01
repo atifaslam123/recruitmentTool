@@ -1,0 +1,75 @@
+@import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+.sdCard{
+    top: 25px;
+}
+clickable{
+    cursor: pointer;
+}
+
+.navbar-nav .dropdown-menu {
+    position: absolute!important;
+    left: -100px;
+  
+}
+.divider{
+    width:1vw;
+    height:auto;
+    display:inline-block;
+}
+
+/* You can add global styles to this file, and also import other style files */
+html, body { height: 100%; width: 100%}
+
+#container {
+    height: 100%;
+    width: 100%;
+}
+#container-back {
+    height: auto;
+    width: auto;
+}
+.sdCard{
+    top: 25px;
+    min-height: calc(97vh - 70px);
+
+}
+.sdCardHeader{
+    min-height: 5vh;
+    height: 5vh;
+}
+.card-body{
+    height: 100%;
+}
+// .sdCardFooter{
+    
+// }
+
+.center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+
+.center-question{
+    text-align: center;
+}
+
+.left{
+    text-align: left;
+}
+.right{
+    text-align: right;
+}
+.left-within-center{
+    max-width: 50%;
+    display: inline-block;
+    text-align: left;
+}
+.right-within-center{
+    display: inline-block;
+    text-align: right;
+}
+
